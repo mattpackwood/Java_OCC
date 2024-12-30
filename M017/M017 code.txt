@@ -1,0 +1,101 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// DrawString.java by Matt Packwood, OCC CIS 2151 Summer 2006, assignment M017												//
+//																																						//
+//	This is the actual Swing object class, see the notes in the code to explain how it works								//
+//																																						//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class DrawString extends JFrame
+{
+	private JTextField inputBox;
+	private JButton changeText;
+	private JPanel topPanel;
+	private DisplayArea myDisplayArea;
+
+	public DrawString()
+	{
+		super ("CIS 2151 | M017 | Matt Packwood");
+		inputBox = new JTextField (" ",20);
+		changeText = new JButton ("Change Text");
+		topPanel = new JPanel();
+		topPanel.setLayout( new FlowLayout() );
+		topPanel.add (changeText);
+		topPanel.add (inputBox);
+		add(topPanel, BorderLayout.NORTH);
+		
+		myDisplayArea = new DisplayArea();
+		myDisplayArea.setLayout(null);
+		myDisplayArea.setPreferredSize(new Dimension(100,100));
+
+		myDisplayArea.setMaximumSize(new Dimension(100, 100));
+
+		myDisplayArea.setSize(50,50);
+		add (myDisplayArea, BorderLayout.CENTER);
+		myDisplayArea.setSize(50,50);
+
+	}
+	
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// DrawStringTest.java by Matt Packwood, OCC CIS 2151 Summer 2006, assignment M017									//
+//																						//
+// This program creates a simple Swing object that has two sliders											//
+//																						//
+// This class just creates the JFrame and instanstates the object inside it										//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+import javax.swing.JFrame;
+
+public class DrawStringTest
+{
+	public static void main(String args[])
+	{
+		DrawString myDrawString = new DrawString();
+		myDrawString.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		myDrawString.setSize(350,350);
+		myDrawString.setVisible(true);
+	}
+}
+
+
+
+
+import java.awt.*;
+import javax.swing.*;
+
+public class DisplayArea extends JPanel
+{
+	private int diameter = 10;
+	
+	public void paintComponent (Graphics g)
+	{
+		super.paintComponent (g);
+		setBackground(Color.CYAN);
+		g.fillOval (0,0, 100, 100);
+	}
+	public void setDiameter (int d)
+	{
+		diameter = (d >= 0 ? d : 10);
+		repaint();
+	}
+	
+	public Dimension getPreferredSize()
+	{
+		return new Dimension (50,50);
+	}
+	
+	public Dimension getMinimumSize()
+	{
+		return getPreferredSize();
+	}
+	
+}
